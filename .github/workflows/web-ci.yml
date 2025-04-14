@@ -65,5 +65,7 @@ jobs:
       run: pnpm install
     - name: Runs ESLint
       run: pnpm lint
+    - name: Runs Jest
+      run: pnpm test
     - name: Build
       run: pnpm build
