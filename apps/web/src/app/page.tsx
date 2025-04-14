@@ -1,6 +1,9 @@
-export default function Home() {
+import { ServiceCardList } from "@/entities/service";
+import { fetchServices } from "@/features/fetch-services";
+
+export default async function Home() {
+    const services = await fetchServices();
     return (
-        <div>
-        </div>
+        <ServiceCardList models={services} />
     );
 }
