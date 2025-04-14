@@ -63,3 +63,7 @@ jobs:
         cache-dependency-path: apps/web/pnpm-lock.yaml
     - name: Install dependencies
       run: pnpm install
+    - name: Runs ESLint
+      run: pnpm lint
+    - name: Build
+      run: pnpm build
