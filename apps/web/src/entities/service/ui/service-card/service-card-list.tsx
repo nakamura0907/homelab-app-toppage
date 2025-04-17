@@ -1,5 +1,5 @@
 import React from "react";
-import { ServiceModel } from "../../types"
+import { ServiceModel } from "../../types";
 import { ServiceCard } from "./service-card";
 
 type Props = {
