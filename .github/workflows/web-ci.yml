@@ -39,7 +39,7 @@ jobs:
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
           done
-lint:
+  lint:
     needs: check-changes
     if: needs.check-changes.outputs.web_changed == 'true'
     runs-on: ubuntu-24.04
@@ -71,7 +71,7 @@ lint:
       - name: Run ESLint
         run: pnpm lint
 
-test:
+  test:
     needs: check-changes
     if: needs.check-changes.outputs.web_changed == 'true'
     runs-on: ubuntu-24.04
@@ -103,7 +103,7 @@ test:
       - name: Run Jest
         run: pnpm test
 
-build:
+  build:
     needs: check-changes
     if: needs.check-changes.outputs.web_changed == 'true'
     runs-on: ubuntu-24.04
