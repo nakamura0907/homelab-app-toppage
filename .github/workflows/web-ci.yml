@@ -18,12 +18,13 @@ concurrency:
 
 jobs:
   check-changes:
-    name: Check apps/web changes
+    name: Check changes
     if: github.event.pull_request.draft == false
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     outputs:
       web_changed: ${{ steps.changed-files.outputs.any_changed }}
+      components_changed: ${{ steps.changed-files-components.outputs.any_changed }}
     steps:
       - uses: actions/checkout@v4
       - name: Get changed files
@@ -32,13 +33,64 @@ jobs:
         with:
           base_sha: ${{ github.event.pull_request.base.sha }}
           files: apps/web/src/**/*
+      - name: Get changed files in components
+        id: changed-files-components
+        uses: tj-actions/changed-files@v45
+        with:
+          base_sha: ${{ github.event.pull_request.base.sha }}
+          files: apps/web/src/**/components/**/*
       - name: List all changed files
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+          ALL_CHANGED_COMPONENTS: ${{ steps.changed-files-components.outputs.all_changed_files }}
         run: |
+          echo "Changed files in web:"
           for file in ${ALL_CHANGED_FILES}; do
             echo "$file was changed"
           done
+          echo "Changed files in components:"
+          for file in ${ALL_CHANGED_COMPONENTS}; do
+            echo "$file was changed"
+          done
+
+  test-component:
+    needs: check-changes
+    if: needs.check-changes.outputs.components_changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: apps/web/pnpm-lock.yaml
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            apps/web/node_modules
+            apps/web/.next/cache
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install dependencies
+        run: pnpm install
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+      - name: Build storybook
+        run: pnpm build-storybook --quiet
+      - name: Run http-server and wait for it to be ready
+        run: pnpm dlx http-server storybook-static --port 6006 --silent & pnpm dlx wait-on tcp:6006
+      - name: Run storybook tests
+        run: pnpm test-storybook
+
   lint:
     needs: check-changes
     if: needs.check-changes.outputs.web_changed == 'true'
