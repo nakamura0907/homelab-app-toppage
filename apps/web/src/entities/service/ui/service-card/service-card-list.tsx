@@ -1,10 +1,10 @@
-import React from "react";
-import { ServiceModel } from "../../types";
-import { ServiceCard } from "./service-card";
+import React from 'react';
+import { ServiceModel } from '../../types';
+import { ServiceCard } from './service-card';
 
 type Props = {
     models: ServiceModel[];
-}
+};
 
 export const ServiceCardList: React.FC<Props> = ({ models }) => {
     return (

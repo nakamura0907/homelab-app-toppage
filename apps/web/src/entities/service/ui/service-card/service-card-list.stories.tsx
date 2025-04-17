@@ -46,7 +46,10 @@ export const Default: Story = {
 
         // 各リンクの属性を確認
         links.forEach((link, index) => {
-            expect(link).toHaveAttribute('href', defaultServices[index].address);
+            expect(link).toHaveAttribute(
+                'href',
+                defaultServices[index].address
+            );
             expect(link).toHaveAttribute('target', '_blank');
             expect(link).toHaveAttribute('rel', 'noopener noreferrer');
         });
@@ -130,4 +133,4 @@ export const ManyServices: Story = {
         expect(container).toHaveClass('md:grid-cols-2');
         expect(container).toHaveClass('lg:grid-cols-3');
     },
-}; 
+};

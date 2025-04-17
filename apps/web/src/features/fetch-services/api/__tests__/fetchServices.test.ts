@@ -18,4 +18,4 @@ describe('fetchServices', () => {
             expect(typeof service.address).toBe('string');
         });
     });
-}); 
+});

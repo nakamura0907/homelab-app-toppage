@@ -1,3 +1,3 @@
-export type { ServiceModel } from "./types";
+export type { ServiceModel } from './types';
 
-export * from "./ui/service-card"
+export * from './ui/service-card';
