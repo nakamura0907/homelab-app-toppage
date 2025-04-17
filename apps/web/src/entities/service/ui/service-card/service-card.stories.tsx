@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { ServiceCard } from './service-card';
 import { ServiceModel } from '../../types';
+import { expect, userEvent, within } from '@storybook/test';
 
 const meta: Meta<typeof ServiceCard> = {
     title: 'Entities/Service/ServiceCard',
@@ -25,6 +26,19 @@ const defaultService: ServiceModel = {
 export const Default: Story = {
     args: {
         model: defaultService,
+    },
+    play: async ({ canvasElement }) => {
+        const canvas = within(canvasElement);
+        const link = canvas.getByRole('link');
+
+        // リンクの属性を確認
+        expect(link).toHaveAttribute('href', defaultService.address);
+        expect(link).toHaveAttribute('target', '_blank');
+        expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+
+        // キーボード操作のシミュレーション
+        await userEvent.tab();
+        expect(link).toHaveFocus();
     },
 };
 
