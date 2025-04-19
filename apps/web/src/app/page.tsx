@@ -1,7 +1,7 @@
-import { ServiceCardList } from '@/entities/service';
+import { DraggableServiceList } from '@/features/draggable-service-list';
 import { fetchServices } from '@/features/fetch-services';
 
 export default async function Home() {
     const services = await fetchServices();
-    return <ServiceCardList models={services} />;
+    return <DraggableServiceList services={services} />;
 }
