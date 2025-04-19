@@ -19,6 +19,10 @@ const serviceListMock = [
     }
 ] as const satisfies ServiceModel[];
 
+/**
+ * サービス一覧を取得する
+ * @returns サービス一覧
+ */
 export const fetchServices = async () => {
     return serviceListMock;
 };

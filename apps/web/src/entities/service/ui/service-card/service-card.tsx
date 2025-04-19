@@ -7,6 +7,9 @@ type Props = {
     model: ServiceModel;
 };
 
+/**
+ * サービスのカードコンポーネント
+ */
 export const ServiceCard: React.FC<Props> = ({ model }) => {
     return (
         <Card>
