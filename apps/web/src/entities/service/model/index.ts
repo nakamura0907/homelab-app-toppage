@@ -1,0 +1,1 @@
+export { serviceClientFactory } from "./client"
