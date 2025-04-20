@@ -3,7 +3,7 @@
 import { ServiceCardList, ServiceModel } from "@/entities/service";
 import { arrayMove, DndContext, DragEndEvent, SortableContext } from "@/shared";
 import React, { useState } from "react";
-import { SortableServiceCard } from "./SortableServiceCard";
+import { SortableServiceCard } from "./sortable-service-card";
 
 type PresentationProps = {
     services: ServiceModel[];
