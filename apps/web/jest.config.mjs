@@ -1,7 +1,7 @@
 /** @type {import('jest').Config} */
 export default {
     preset: 'ts-jest',
-    testEnvironment: 'node',
+    testEnvironment: 'jsdom',
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1',
     },
