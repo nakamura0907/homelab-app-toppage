@@ -2,6 +2,12 @@ import { ServiceModel } from "@/entities/service";
 import { arrayMove } from "@/shared";
 import { useState } from "react";
 
+/**
+ * ドラッグ可能なサービス一覧のカスタムフック
+ * 
+ * @param initialServices 初期サービス一覧
+ * @returns
+ */
 export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
     const [services, setServices] = useState<ServiceModel[]>(initialServices);
 
