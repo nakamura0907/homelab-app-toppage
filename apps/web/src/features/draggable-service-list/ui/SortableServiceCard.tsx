@@ -1,6 +1,5 @@
 import { ServiceModel, ServiceCard } from "@/entities/service";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import { useSortable, CSS } from "@/shared";
 import React from "react";
 
 type Props = {

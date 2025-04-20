@@ -1,9 +1,23 @@
 "use client";
 
-import { ServiceModel } from "@/entities/service";
+import { ServiceCardList, ServiceModel } from "@/entities/service";
 import { arrayMove, DndContext, DragEndEvent, SortableContext } from "@/shared";
 import React, { useState } from "react";
 import { SortableServiceCard } from "./SortableServiceCard";
+
+type PresentationProps = {
+    services: ServiceModel[];
+};
+
+const DraggableServiceListPresentation: React.FC<PresentationProps> = ({ services }) => {
+    return (
+        <ServiceCardList>
+            {services.map(value => (
+                <SortableServiceCard key={value.address} model={value} />
+            ))}
+        </ServiceCardList>
+    )
+}
 
 type Props = {
     services: ServiceModel[]
@@ -38,9 +52,7 @@ export const DraggableServiceList: React.FC<Props> = ({ services: initialService
     return (
         <DndContext onDragEnd={handleDragEnd}>
             <SortableContext items={services.map(value => value.address)}>
-                {services.map(value => (
-                    <SortableServiceCard key={value.address} model={value} />
-                ))}
+                <DraggableServiceListPresentation services={services} />
             </SortableContext>
         </DndContext>
     )
