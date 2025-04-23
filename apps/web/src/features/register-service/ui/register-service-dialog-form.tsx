@@ -6,13 +6,21 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useForm, z, zodResolver } from "@/shared";
 
+/**
+ * サービス登録ダイアログのフォームスキーマ
+ */
 const formSchema = z.object({
     title: z.string().min(1, 'タイトルは必須です'),
     address: z.string().url('URL形式で入力してください'),
 });
 
+type FormValues = z.infer<typeof formSchema>;
+
+/**
+ * サービス登録ダイアログのフォームコンポーネント
+ */
 export const RegisterServiceDialogForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             title: "",
@@ -20,10 +28,14 @@ export const RegisterServiceDialogForm = () => {
         },
     });
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
+    /**
+     * フォームのサブミット時に発火
+     * 
+     * 新規にサービスを登録する
+     */
+    const onSubmit = (values: FormValues) => {
         console.log(values);
     }
-
 
     return (
         <Form {...form}>
@@ -42,6 +54,7 @@ export const RegisterServiceDialogForm = () => {
                             </FormItem>
                         )}
                     />
+                    {/* タイトルの入力フィールド */}
                     <FormField
                         control={form.control}
                         name="address"
@@ -55,6 +68,7 @@ export const RegisterServiceDialogForm = () => {
                             </FormItem>
                         )}
                     />
+                    {/* URLの入力フィールド */}
                 </div>
                 <DialogFooter>
                     <Button type="submit">登録する</Button>
