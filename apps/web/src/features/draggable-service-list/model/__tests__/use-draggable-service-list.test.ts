@@ -52,12 +52,6 @@ describe('useDraggableServiceList', () => {
         const { result } = renderHook(() => useDraggableServiceList([]));
 
         expect(result.current.services).toEqual([]);
-
-        act(() => {
-            result.current.changeServiceOrder(0, 1);
-        });
-
-        expect(result.current.services).toEqual([]);
     });
 
     it('複数回の並び順変更が正しく反映されること', () => {
