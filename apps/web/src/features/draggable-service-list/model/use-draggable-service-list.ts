@@ -1,6 +1,6 @@
 import { ServiceModel } from "@/entities/service";
 import { arrayMove } from "@/shared";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * ドラッグ可能なサービス一覧のカスタムフック
@@ -10,6 +10,17 @@ import { useState } from "react";
  */
 export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
     const [services, setServices] = useState<ServiceModel[]>(initialServices);
+
+    // initialServicesが変更されたらservicesの状態を更新
+    useEffect(() => {
+        setServices(prevServices => {
+            // 既存のサービスの並び順を保持して末尾に追加する
+            const existingIds = new Set(prevServices.map(s => s.address));
+            const newServices = initialServices.filter(s => !existingIds.has(s.address));
+
+            return [...prevServices, ...newServices];
+        });
+    }, [initialServices]);
 
     const changeServiceOrder = (oldIndex: number, newIndex: number) => {
         const newServices = arrayMove(services, oldIndex, newIndex);
