@@ -2,6 +2,7 @@ import { ServiceModel } from "../types";
 
 type ServiceClient = {
     fetchServices: () => Promise<ServiceModel[]>
+    registerService: (service: ServiceModel) => Promise<void>
 }
 
 const serviceListMock = [
@@ -25,6 +26,9 @@ const serviceListMock = [
 const inMemoryClient: ServiceClient = {
     fetchServices: async () => {
         return serviceListMock
+    },
+    registerService: async (service: ServiceModel) => {
+        serviceListMock.push(service);
     }
 }
 
