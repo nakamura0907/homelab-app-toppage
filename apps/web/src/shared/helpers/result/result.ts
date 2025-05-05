@@ -35,10 +35,16 @@ export class Result<T, E extends Error> {
         }
     }
 
+    /**
+     * 成功と判定されるResultクラスを返す
+     */
     static ok<T>(value: T) {
         return new Result(value, null);
     }
 
+    /**
+     * 失敗と判定されるResultクラスを返す
+     */
     static err<E extends Error>(error: E) {
         return new Result(null, error);
     }
@@ -61,10 +67,18 @@ export class Result<T, E extends Error> {
         throw new Error('Unknown error');
     }
 
+    /**
+     * 成功したResultか判定する
+     * @returns 成功したと判定された場合は true を返す
+     */
     isOk(): this is Result<T, never> {
         return this._ok !== null;
     }
 
+    /**
+     * 失敗したResultか判定する
+     * @returns 失敗したと判定された場合は true を返す
+     */
     isErr(): this is Result<never, E> {
         return this._err !== null;
     }
