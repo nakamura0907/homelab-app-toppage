@@ -5,6 +5,7 @@ type ServiceClient = {
     registerService: (service: ServiceModel) => Promise<void>
 }
 
+// FIXME: pnpm startで変更が反映されない
 const serviceListMock = [
     {
         title: 'Proxmox VE',
