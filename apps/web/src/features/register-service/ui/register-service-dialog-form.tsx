@@ -12,6 +12,8 @@ import { Button } from '@/components/ui/button';
 import { DialogFooter } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { useForm, z, zodResolver } from '@/shared';
+import { registerService } from '../actions';
+import { useRouter } from 'next/navigation';
 
 /**
  * サービス登録ダイアログのフォームスキーマ
@@ -27,6 +29,7 @@ type FormValues = z.infer<typeof formSchema>;
  * サービス登録ダイアログのフォームコンポーネント
  */
 export const RegisterServiceDialogForm = () => {
+    const router = useRouter();
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -40,8 +43,16 @@ export const RegisterServiceDialogForm = () => {
      *
      * 新規にサービスを登録する
      */
-    const onSubmit = (values: FormValues) => {
-        console.log(values);
+    const onSubmit = async (values: FormValues) => {
+        const formData = new FormData();
+
+        formData.append('title', values.title);
+        formData.append('address', values.address);
+
+        await registerService(formData);
+
+        form.reset();
+        router.refresh(); // ページを更新
     };
 
     return (
