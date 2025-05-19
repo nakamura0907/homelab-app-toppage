@@ -55,6 +55,49 @@ jobs:
             echo "$file was changed"
           done
 
+  test-static:
+    needs: check-changes
+    if: needs.check-changes.outputs.web_changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Common Setup
+        uses: ../../.github/actions/setup-node-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ESLint
+        run: pnpm lint
+
+      - name: Run build
+        run: pnpm build
+
+  test-unit:
+    needs: check-changes
+    if: needs.check-changes.outputs.web_changed == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Common Setup
+        uses: ../../.github/actions/setup-node-pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run Jest
+        run: pnpm test
+
   test-component:
     needs: check-changes
     if: needs.check-changes.outputs.components_changed == 'true'
@@ -65,126 +108,21 @@ jobs:
         working-directory: apps/web
     steps:
       - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: apps/web/pnpm-lock.yaml
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            apps/web/node_modules
-            apps/web/.next/cache
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+
+      - name: Common Setup
+        uses: ../../.github/actions/setup-node-pnpm
+
       - name: Install dependencies
         run: pnpm install
+
       - name: Install Playwright Browsers
         run: pnpm exec playwright install chromium --with-deps
+
       - name: Build storybook
         run: pnpm build-storybook --quiet
+
       - name: Run http-server and wait for it to be ready
         run: pnpm dlx http-server storybook-static --port 6006 --silent & pnpm dlx wait-on tcp:6006
+        
       - name: Run storybook tests
         run: pnpm test-storybook
-
-  lint:
-    needs: check-changes
-    if: needs.check-changes.outputs.web_changed == 'true'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    defaults:
-      run:
-        working-directory: apps/web
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: apps/web/pnpm-lock.yaml
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            apps/web/node_modules
-            apps/web/.next/cache
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run ESLint
-        run: pnpm lint
-
-  test:
-    needs: check-changes
-    if: needs.check-changes.outputs.web_changed == 'true'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    defaults:
-      run:
-        working-directory: apps/web
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: apps/web/pnpm-lock.yaml
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            apps/web/node_modules
-            apps/web/.next/cache
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run Jest
-        run: pnpm test
-
-  build:
-    needs: check-changes
-    if: needs.check-changes.outputs.web_changed == 'true'
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    defaults:
-      run:
-        working-directory: apps/web
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'pnpm'
-          cache-dependency-path: apps/web/pnpm-lock.yaml
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            apps/web/node_modules
-            apps/web/.next/cache
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-      - name: Install dependencies
-        run: pnpm install
-      - name: Run build
-        run: pnpm build
