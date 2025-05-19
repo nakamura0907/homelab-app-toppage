@@ -68,6 +68,8 @@ jobs:
 
       - name: Common Setup
         uses: ./.github/actions/setup-node-pnpm
+        with:
+            project_dir: apps/web
 
       - name: Install dependencies
         run: pnpm install
@@ -91,6 +93,8 @@ jobs:
 
       - name: Common Setup
         uses: ./.github/actions/setup-node-pnpm
+        with:
+            project_dir: apps/web
 
       - name: Install dependencies
         run: pnpm install
@@ -111,6 +115,8 @@ jobs:
 
       - name: Common Setup
         uses: ./.github/actions/setup-node-pnpm
+        with:
+            project_dir: apps/web
 
       - name: Install dependencies
         run: pnpm install

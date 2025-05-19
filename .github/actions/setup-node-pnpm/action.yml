@@ -1,6 +1,10 @@
 name: Setup Node.js and PNPM
-
 description: Common setup for Node 20 and PNPM 10
+
+inputs:
+  project_dir:
+    description: The directory where pnpm-lock.yaml is located
+    required: true
 
 runs:
   using: "composite"
@@ -15,14 +19,14 @@ runs:
       with:
         node-version: 20
         cache: 'pnpm'
+        cache-dependency-path: ${{ inputs.project_dir }}/pnpm-lock.yaml
 
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
         path: |
-          node_modules
-          .next/cache
-        key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          ${{ inputs.project_dir }}/node_modules
+          ${{ inputs.project_dir }}/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.project_dir)) }}-${{ hashFiles(format('{0}/**/*.js', inputs.project_dir), format('{0}/**/*.jsx', inputs.project_dir), format('{0}/**/*.ts', inputs.project_dir), format('{0}/**/*.tsx', inputs.project_dir)) }}
         restore-keys: |
-          ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
-
+          ${{ runner.os }}-nextjs-${{ hashFiles(format('{0}/pnpm-lock.yaml', inputs.project_dir)) }}-
