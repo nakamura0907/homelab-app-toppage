@@ -35,5 +35,5 @@ const defaultServices: ServiceModel[] = [
 export const Default: Story = {
     args: {
         services: defaultServices,
-    }
+    },
 };

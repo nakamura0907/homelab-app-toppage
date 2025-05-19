@@ -19,13 +19,17 @@ describe('useDraggableServiceList', () => {
     ];
 
     it('初期状態が正しく設定されること', () => {
-        const { result } = renderHook(() => useDraggableServiceList(mockServices));
+        const { result } = renderHook(() =>
+            useDraggableServiceList(mockServices)
+        );
 
         expect(result.current.services).toEqual(mockServices);
     });
 
     it('サービスの並び順が正しく変更されること', () => {
-        const { result } = renderHook(() => useDraggableServiceList(mockServices));
+        const { result } = renderHook(() =>
+            useDraggableServiceList(mockServices)
+        );
 
         act(() => {
             result.current.changeServiceOrder(0, 2);
@@ -39,7 +43,9 @@ describe('useDraggableServiceList', () => {
     });
 
     it('同じインデックスを指定した場合、並び順が変更されないこと', () => {
-        const { result } = renderHook(() => useDraggableServiceList(mockServices));
+        const { result } = renderHook(() =>
+            useDraggableServiceList(mockServices)
+        );
 
         act(() => {
             result.current.changeServiceOrder(1, 1);
@@ -55,7 +61,9 @@ describe('useDraggableServiceList', () => {
     });
 
     it('複数回の並び順変更が正しく反映されること', () => {
-        const { result } = renderHook(() => useDraggableServiceList(mockServices));
+        const { result } = renderHook(() =>
+            useDraggableServiceList(mockServices)
+        );
 
         act(() => {
             result.current.changeServiceOrder(0, 2);
@@ -71,4 +79,4 @@ describe('useDraggableServiceList', () => {
             mockServices[0],
         ]);
     });
-}); 
+});

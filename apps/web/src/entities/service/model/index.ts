@@ -1,1 +1,1 @@
-export { serviceClientFactory } from "./client"
+export { serviceClientFactory } from './client';

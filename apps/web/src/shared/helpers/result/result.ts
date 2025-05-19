@@ -1,6 +1,6 @@
 /**
  * Resultクラス
- * 
+ *
  * @see https://medium.com/@cole.carley/implementing-the-rust-result-type-in-typescript-2c2a93c0c165
  */
 export class Result<T, E extends Error> {
@@ -9,7 +9,7 @@ export class Result<T, E extends Error> {
 
     /**
      * Resultクラスのコンストラクタ
-     * 
+     *
      * @throws {Error} ok, errの両方に値がない。と判定された場合
      * @throws {Error} ok, errの両方に値がある。と判定された場合
      */
@@ -20,7 +20,7 @@ export class Result<T, E extends Error> {
         }
         // 両方に値がある場合
         if (ok && err) {
-            throw new Error('Result cannot have both a value and and error')
+            throw new Error('Result cannot have both a value and and error');
         }
 
         // okに値がある場合
@@ -51,7 +51,7 @@ export class Result<T, E extends Error> {
 
     /**
      * 成功した場合は結果を返し、エラーの場合は例外をスローする
-     * 
+     *
      * @throws {E} 結果がエラーの場合
      * @throws {Error} 何らかの理由で成功もエラーもしていないと判定された場合
      */

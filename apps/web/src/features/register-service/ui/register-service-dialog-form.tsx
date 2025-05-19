@@ -1,10 +1,17 @@
 'use client';
 
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { DialogFooter } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { useForm, z, zodResolver } from "@/shared";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from '@/components/ui/form';
+import { Button } from '@/components/ui/button';
+import { DialogFooter } from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { useForm, z, zodResolver } from '@/shared';
 
 /**
  * サービス登録ダイアログのフォームスキーマ
@@ -23,19 +30,19 @@ export const RegisterServiceDialogForm = () => {
     const form = useForm<FormValues>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: "",
-            address: "",
+            title: '',
+            address: '',
         },
     });
 
     /**
      * フォームのサブミット時に発火
-     * 
+     *
      * 新規にサービスを登録する
      */
     const onSubmit = (values: FormValues) => {
         console.log(values);
-    }
+    };
 
     return (
         <Form {...form}>
@@ -48,7 +55,10 @@ export const RegisterServiceDialogForm = () => {
                             <FormItem>
                                 <FormLabel>タイトル</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Proxmox VE" {...field} />
+                                    <Input
+                                        placeholder="Proxmox VE"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -62,7 +72,10 @@ export const RegisterServiceDialogForm = () => {
                             <FormItem>
                                 <FormLabel>URL</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="https://proxmox.example.com" {...field} />
+                                    <Input
+                                        placeholder="https://proxmox.example.com"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -75,5 +88,5 @@ export const RegisterServiceDialogForm = () => {
                 </DialogFooter>
             </form>
         </Form>
-    )
-}
+    );
+};

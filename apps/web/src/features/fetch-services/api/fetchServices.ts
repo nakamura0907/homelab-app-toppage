@@ -5,6 +5,6 @@ import { serviceClientFactory } from '@/entities/service';
  * @returns サービス一覧
  */
 export const fetchServices = async () => {
-    const { fetchServices } = serviceClientFactory()
-    return fetchServices()
+    const { fetchServices } = serviceClientFactory();
+    return fetchServices();
 };

@@ -5,9 +5,9 @@ import { RegisterServiceDialog } from '@/features/register-service';
 export default async function Home() {
     const services = await fetchServices();
     return (
-        <div className='container mx-auto p-4'>
+        <div className="container mx-auto p-4">
             <RegisterServiceDialog />
             <DraggableServiceList services={services} />
         </div>
-    )
+    );
 }

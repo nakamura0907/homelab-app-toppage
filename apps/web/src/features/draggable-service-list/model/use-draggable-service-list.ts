@@ -1,10 +1,10 @@
-import { ServiceModel } from "@/entities/service";
-import { arrayMove } from "@/shared";
-import { useEffect, useState } from "react";
+import { ServiceModel } from '@/entities/service';
+import { arrayMove } from '@/shared';
+import { useEffect, useState } from 'react';
 
 /**
  * ドラッグ可能なサービス一覧のカスタムフック
- * 
+ *
  * @param initialServices 初期サービス一覧
  * @returns
  */
@@ -13,11 +13,11 @@ export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
 
     // initialServicesが変更されたらservicesの状態を更新
     useEffect(() => {
-        setServices(prevServices => {
+        setServices((prevServices) => {
             // JavaScript heap out of memory対策のため
             // 中身に変更があった場合のみ処理を続ける
-            const prevIds = prevServices.map(s => s.address);
-            const incomingIds = initialServices.map(s => s.address);
+            const prevIds = prevServices.map((s) => s.address);
+            const incomingIds = initialServices.map((s) => s.address);
 
             const sameOrder =
                 prevIds.length === incomingIds.length &&
@@ -27,8 +27,10 @@ export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
             if (sameOrder) return prevServices;
 
             // 既存のサービスの並び順を保持して末尾に追加する
-            const existingIds = new Set(prevServices.map(s => s.address));
-            const newServices = initialServices.filter(s => !existingIds.has(s.address));
+            const existingIds = new Set(prevServices.map((s) => s.address));
+            const newServices = initialServices.filter(
+                (s) => !existingIds.has(s.address)
+            );
             return [...prevServices, ...newServices];
         });
     }, [initialServices]);
@@ -36,7 +38,7 @@ export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
     const changeServiceOrder = (oldIndex: number, newIndex: number) => {
         const newServices = arrayMove(services, oldIndex, newIndex);
         setServices(newServices);
-    }
+    };
 
     return {
         services,
@@ -46,5 +48,5 @@ export const useDraggableServiceList = (initialServices: ServiceModel[]) => {
          * @param newIndex 変更後のインデックス
          */
         changeServiceOrder,
-    }
-}
+    };
+};
