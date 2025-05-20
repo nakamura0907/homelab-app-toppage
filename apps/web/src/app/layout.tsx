@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { enableMockNode } from '@/shared/helpers';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -6,6 +7,7 @@ export const metadata: Metadata = {
     description: '自宅サーバーのトップページ',
 };
 
+await enableMockNode();
 export default function RootLayout({
     children,
 }: Readonly<{
