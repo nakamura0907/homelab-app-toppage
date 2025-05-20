@@ -5,12 +5,27 @@ const makeMockServerUrl = (path: string) => {
     return `${MOCK_SERVER_URL}${path}`;
 };
 
+const serviceListMock = [
+    {
+        title: 'Proxmox VE',
+        address: 'https://192.168.0.200:8006',
+    },
+    {
+        title: 'Pi-hole',
+        address: 'http://192.168.0.231',
+    },
+    {
+        title: 'Prometheus',
+        address: 'http://192.168.0.232:9090',
+    },
+    {
+        title: 'Loki',
+        address: 'http://192.168.0.233:3100',
+    },
+];
+
 export const handlers = [
-    http.get(makeMockServerUrl('/users'), () => {
-        return HttpResponse.json({
-            id: 'c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d',
-            firstName: 'John',
-            lastName: 'Maverick',
-        });
+    http.get(makeMockServerUrl('/services'), () => {
+        return HttpResponse.json({ services: serviceListMock });
     }),
 ];
