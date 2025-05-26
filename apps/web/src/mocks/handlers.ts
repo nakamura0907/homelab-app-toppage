@@ -1,3 +1,4 @@
+import type { ServiceModel } from '@/entities/service';
 import { http, HttpResponse } from 'msw';
 
 const MOCK_SERVER_URL = 'https://example.com';
@@ -22,7 +23,7 @@ const serviceListMock = [
         title: 'Loki',
         address: 'http://192.168.0.233:3100',
     },
-];
+] satisfies ServiceModel[];
 
 export const handlers = [
     http.get(makeMockServerUrl('/services'), () => {
