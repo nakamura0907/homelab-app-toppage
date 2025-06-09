@@ -1,0 +1,13 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`BaseLayout > should match snapshot. 1`] = `
+<div>
+  <div>
+    <header />
+    <main>
+      test
+    </main>
+    <footer />
+  </div>
+</div>
+`;

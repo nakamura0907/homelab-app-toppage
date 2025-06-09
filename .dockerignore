@@ -1,0 +1,8 @@
+# https://pnpm.io/ja/docker
+node_modules
+.git
+.gitignore
+*.md
+dist
+
+.next
