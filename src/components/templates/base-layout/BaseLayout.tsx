@@ -1,5 +1,8 @@
 import React from 'react';
 
+/**
+ * アプリケーションのベースレイアウトコンポーネント
+ */
 export const BaseLayout = (props: { children: React.ReactNode }) => {
   return (
     <>
