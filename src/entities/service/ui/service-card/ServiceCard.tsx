@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle } from '@/components';
+import { Card, CardHeader, CardTitle } from '@/shared/components';
 import { ServiceModel } from '../../model';
 import Link from 'next/link';
 
