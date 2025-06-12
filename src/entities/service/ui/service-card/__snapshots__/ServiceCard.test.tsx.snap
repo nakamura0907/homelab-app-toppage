@@ -19,7 +19,7 @@ exports[`ServiceCard > render > should match snapshot. 1`] = `
           rel="noopener noreferrer"
           target="_blank"
         >
-          mock service
+          Nginx
         </a>
       </div>
     </div>

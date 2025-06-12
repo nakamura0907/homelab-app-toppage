@@ -4,7 +4,7 @@ exports[`BaseLayout > should match snapshot. 1`] = `
 <div>
   <header />
   <main>
-    test
+    BaseLayout
   </main>
   <footer />
 </div>

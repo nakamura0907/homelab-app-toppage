@@ -11,15 +11,15 @@ type Story = StoryObj<typeof ServiceCardList>;
 
 const mockServices: ServiceModel[] = [
   {
-    title: 'サービス1',
+    title: 'Nginx',
     address: 'http://localhost:3000',
   },
   {
-    title: 'サービス2',
+    title: 'Plex',
     address: 'http://localhost:4000',
   },
   {
-    title: 'サービス3',
+    title: 'Pi-hole',
     address: 'http://localhost:5000',
   },
 ];

@@ -4,7 +4,7 @@ import { ServiceCard } from './ServiceCard';
 import { ServiceModel } from '../../model';
 
 const mockServiceModel = {
-  title: 'mock service',
+  title: 'Nginx',
   address: 'http://localhost:3000',
 } satisfies ServiceModel;
 
@@ -29,7 +29,7 @@ describe('ServiceCard', () => {
 
   it('should render a correct link', () => {
     render(<ServiceCard model={mockServiceModel} />);
-    const link = screen.getByRole('link', { name: /mock service/i });
+    const link = screen.getByRole('link', { name: /Nginx/i });
 
     expect(link).toHaveAttribute('href', mockServiceModel.address);
     expect(link).toHaveAttribute('target', '_blank');

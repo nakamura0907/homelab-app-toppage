@@ -11,7 +11,7 @@ type Story = StoryObj<typeof ServiceCard>;
 export const Primary: Story = {
   args: {
     model: {
-      title: 'mock service',
+      title: 'Nginx',
       address: 'http://localhost:3000',
     },
   },

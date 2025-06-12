@@ -5,14 +5,14 @@ import { BaseLayout } from './BaseLayout';
 describe('BaseLayout', () => {
   describe('render', () => {
     it('should have header tag.', () => {
-      const { container } = render(<BaseLayout>test</BaseLayout>);
+      const { container } = render(<BaseLayout>BaseLayout</BaseLayout>);
 
       const header = container.querySelector('header');
       expect(header).toBeInTheDocument();
     });
   });
   it('should match snapshot.', () => {
-    const { container } = render(<BaseLayout>test</BaseLayout>);
+    const { container } = render(<BaseLayout>BaseLayout</BaseLayout>);
 
     expect(container).matchSnapshot();
   });

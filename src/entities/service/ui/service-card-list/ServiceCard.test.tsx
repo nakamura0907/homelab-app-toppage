@@ -5,8 +5,8 @@ import { ServiceModel } from '../../model';
 import { cleanup } from '@testing-library/react';
 
 const mockServices: ServiceModel[] = [
-  { title: 'mock service A', address: 'http://localhost:3000' },
-  { title: 'mock service B', address: 'http://localhost:4000' },
+  { title: 'Nginx', address: 'http://localhost:3000' },
+  { title: 'Plex', address: 'http://localhost:4000' },
 ];
 
 afterEach(() => {

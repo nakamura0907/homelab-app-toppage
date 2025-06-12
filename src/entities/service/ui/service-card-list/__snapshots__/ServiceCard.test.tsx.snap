@@ -22,7 +22,7 @@ exports[`ServiceCardList > render > should match snapshot 1`] = `
             rel="noopener noreferrer"
             target="_blank"
           >
-            mock service A
+            Nginx
           </a>
         </div>
       </div>
@@ -44,7 +44,7 @@ exports[`ServiceCardList > render > should match snapshot 1`] = `
             rel="noopener noreferrer"
             target="_blank"
           >
-            mock service B
+            Plex
           </a>
         </div>
       </div>
