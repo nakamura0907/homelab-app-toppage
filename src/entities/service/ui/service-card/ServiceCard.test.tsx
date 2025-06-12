@@ -8,11 +8,11 @@ const mockServiceModel = {
   address: 'http://localhost:3000',
 } satisfies ServiceModel;
 
-describe('ServiceCard', () => {
-  afterEach(() => {
-    cleanup();
-  });
+afterEach(() => {
+  cleanup();
+});
 
+describe('ServiceCard', () => {
   describe('render', () => {
     it('should match snapshot.', () => {
       const { container } = render(<ServiceCard model={mockServiceModel} />);
