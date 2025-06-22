@@ -1,7 +1,7 @@
 {
   "name": "homelab-app-toppage",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "turbo": "turbo"
   },
   "packageManager": "pnpm@10.7.1",
   "devDependencies": {
